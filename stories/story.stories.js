@@ -42,8 +42,6 @@ export const Main = () => {
               </Modal>
             );
           }}/>
-
-          <div id="modal-portal"/>
         </div>
       </ModalRouter>
     </div>
