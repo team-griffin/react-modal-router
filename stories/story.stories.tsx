@@ -8,7 +8,7 @@ export default { title: 'Main' };
 
 export const Main = () => {
 
-  function InnerComponent(props) {
+  function InnerComponent() {
     const modalRouter = useModalRouter();
 
     function openFooModal() {

@@ -1,7 +1,13 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, ReactElement } from 'react';
 import ModalRouterContext from './context';
+import type { ModalRouterContextValue } from './context';
 
-function shouldRender(router, props) {
+type ModalRouteProps = {
+  path: string,
+  render: (x: { router: ModalRouterContextValue }) => ReactElement,
+};
+
+function shouldRender(router: ModalRouterContextValue, props: ModalRouteProps) {
   if (router.path == null) {
     return false;
   }
@@ -13,7 +19,7 @@ function shouldRender(router, props) {
   return false;
 }
 
-function ModalRoute(props) {
+function ModalRoute(props: ModalRouteProps) {
   const router = useContext(ModalRouterContext);
 
   const canRender = shouldRender(router, props);

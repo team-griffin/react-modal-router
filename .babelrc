@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": ["> 5% in US"]
+      }
+    }],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ]
+}

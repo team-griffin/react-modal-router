@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, ReactElement } from 'react';
 import ModalRouterContext from './context';
 
-function ModalRouter(props) {
+export type ModalRouterProps = {
+  children: ReactElement,
+};
+
+function ModalRouter(props: ModalRouterProps) {
   const [ path, setPath ] = useState(null);
   const [ params, setParams ] = useState(null);
 

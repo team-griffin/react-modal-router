@@ -1,23 +1,44 @@
 {
   "name": "react-modal-router",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/cjs/react-modal-router.js",
   "repository": "git@github.com:team-griffin/react-modal-router.git",
   "author": "Joshua Thornton <jthornton1@godaddy.com>",
   "license": "MIT",
+  "module": "dist/es/react-modal-router.js",
+  "types": "dist/es/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
+    "@types/react-modal": "^3.10.6",
     "babel-loader": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-modal": "^3.11.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.23.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.27.1",
+    "ts-loader": "^8.0.1",
+    "typescript": "^3.9.7"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
     "react-modal": "^3.11.2"
   },
   "dependencies": {},
   "scripts": {
+    "build": "rimraf dist && rollup --config ./rollup.config.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   }
