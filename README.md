@@ -5,14 +5,14 @@
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ModalRouter, ModalRoute, useModalRouter } from 'react-modal-router';
+import { ModalRouter, ModalRoute, usePush } from 'react-modal-router';
 import Modal from 'react-modal';
 
 function Page(props) {
-  const modalRouter = useModalRouter();
+  const push = usePush();
 
   function openModal() {
-    modalRouter.actions.setPath('foo');
+    push('/foo');
   }
 
   return (
@@ -32,7 +32,7 @@ function App() {
         <div>
           <Page/>
 
-          <ModalRoute path="foo" render={({ router }) => {
+          <ModalRoute path="/foo" render={({ router }) => {
 
             return (
               <Modal
@@ -52,4 +52,43 @@ function App() {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-## Development
+## API
+### ModalRouter
+```tsx
+<ModalRouter>
+  {children}
+</ModalRouter>
+```
+
+### ModalRoute
+```tsx
+<ModalRoute
+  path={pathString}
+  render={(props: { router: Router }) => Element}
+/>
+```
+
+### usePush
+```ts
+() => (path: string, params?: object) => void
+```
+
+### useCloseModal
+```ts
+() => () => void
+```
+
+### useParams
+```ts
+() => object | null
+```
+
+### useParam
+```ts
+(key: string) => any
+```
+
+### useModalRouter
+```ts
+() => Router
+```

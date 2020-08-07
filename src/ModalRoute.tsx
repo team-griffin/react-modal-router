@@ -1,18 +1,18 @@
-import React, { useContext, Fragment, ReactElement } from 'react';
-import ModalRouterContext from './context';
+import React, { useMemo, Fragment, ReactElement } from 'react';
 import type { ModalRouterContextValue } from './context';
+import useModalRouter from './useModalRouter';
 
 type ModalRouteProps = {
   path: string,
-  render: (x: { router: ModalRouterContextValue }) => ReactElement,
+  render: (props: { router: ModalRouterContextValue }) => ReactElement,
 };
 
 function shouldRender(router: ModalRouterContextValue, props: ModalRouteProps) {
-  if (router.path == null) {
+  if (router.state.path == null) {
     return false;
   }
 
-  if (router.path === props.path) {
+  if (router.state.path === props.path) {
     return true;
   }
 
@@ -20,9 +20,11 @@ function shouldRender(router: ModalRouterContextValue, props: ModalRouteProps) {
 }
 
 function ModalRoute(props: ModalRouteProps) {
-  const router = useContext(ModalRouterContext);
+  const router = useModalRouter();
 
-  const canRender = shouldRender(router, props);
+  const canRender = useMemo(() => {
+    return shouldRender(router, props);
+  }, [ router.state.path, props.path ]);
 
   if (canRender === false) {
     return null;

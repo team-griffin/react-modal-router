@@ -1,30 +1,34 @@
-import React, { useState, ReactElement } from 'react';
-import ModalRouterContext from './context';
+import React, { useState, ReactNode, useMemo, useCallback } from 'react';
+import { ModalRouterProvider } from './context';
 
 export type ModalRouterProps = {
-  children: ReactElement,
+  children: ReactNode,
 };
 
 function ModalRouter(props: ModalRouterProps) {
   const [ path, setPath ] = useState(null);
   const [ params, setParams ] = useState(null);
-
-  function closeModal() {
+  const closeModal = useCallback(() => {
     setPath(null);
-  }
+  }, [ setPath ])
+  const state = useMemo(() => ({
+    path,
+    params,
+  }), [ path, params ]);
+  const actions = useMemo(() => ({
+    setPath,
+    setParams,
+    closeModal,
+  }), [ setPath, setParams, closeModal ])
+  const value = useMemo(() => ({
+    state,
+    actions,
+  }), [ state, actions ]);
 
   return (
-    <ModalRouterContext.Provider value={{
-      path,
-      params,
-      actions: {
-        setPath,
-        setParams,
-        closeModal
-      },
-    }}>
+    <ModalRouterProvider value={value}>
       {props.children}
-    </ModalRouterContext.Provider>
+    </ModalRouterProvider>
   );
 }
 

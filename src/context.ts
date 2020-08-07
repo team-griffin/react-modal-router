@@ -1,15 +1,19 @@
 import { createContext } from 'react';
 
 export type ModalRouterContextValue = {
-  path: string | null,
-  params: Object | null,
+  state: {
+    path: string | null,
+    params: { [key: string]: any } | null,
+  },
   actions: {
     setPath: (path: string | null) => void,
-    setParams: (params: Object) => void,
+    setParams: (params: object) => void,
     closeModal: () => void,
   },
 };
 
-const ModalRouterContext = createContext<ModalRouterContextValue>(undefined);
+export const ModalRouterContext = createContext<ModalRouterContextValue>(undefined);
+
+export const ModalRouterProvider = ModalRouterContext.Provider;
 
 export default ModalRouterContext;
